@@ -42,9 +42,270 @@ Innehållsförteckning
     - Värmekamera
   * Justera foton
     - Kameravinklar
+    - Inriktningsparametrar
+    - Komponenter
+    - Inkrementell bildjustering
+    - Generering av punktmoln baserat på importerad kameradata
+  * Generering av punktmoln
+    - Parametrar
+    - Importera punktmoln
+  * Generering av mesh (3D-modell)
+    - Mesh baserad på bilder
+      - Parametrar
+    - Importera mesh
+  * Modell textur
+    - Färgkalibrering
+    - Parametrar
+    - Se Mesh UVs
+  * Generera titled model 
+    - Parametrar
+    - Importera titled model
+  * Generera DEM (Digital Elevation Model)
+    - Parametrar
+    - Importera DEM
+  * Generera ortofoto
+    - Parametrar
+    - Importera ortofoto
+  * Exportera resultat
+    - Exportera punktmoln
+    - Exportera kamerakalibrering, kameravinklar och inriktningsparametrar
+    - Exportera 3D-modell
+    - Exportera ortofoto
+    - Exportera DSM (Digital Surface Model)
+    - Exportera titled model
+    - Undersökningsstatistik
+    - Bearbetningsrapport
+
+4. Referering
+  * kamerakalibrering
+    - Kalibreringsgrupper
+    - Kameratyper
+    - Kamerakalibreringsparametrar
+  * Georeferering
+  * Koordinatsystem
+  * Optimering
+  * Vad betyder felen i "Reference pane"?
+
+5. Mätning
+  * Utföra mätningar på 3D-modell
+  * Utföra mätningar på DEM
+
+6. Redigering
+  * Använda maskering
+  * Redigera punktmoln
+  * Klassificering av tätt punktmoln
+  * Shapes
+
+7. Felsökning - text
+  * Vad betyder olika felmeddelanden?
+  * Vad ska jag göra om programmet kraschar?
 
 
+1. Introduktion
+  
+* Vad är Agisoft Metashape?
 
+  Agisoft Metashape tillåter en att bland anat generera 3D-modeller och orotofoton genom fotogrammetri. Dessa modeller kan sedan
+  användas för att mätning direkt i programmet, eller exporteras i standarliserade format.
+
+
+* Vad finns det för olika licenser?
+
+  Node-locked (Nodlåst) licens kan aktiveras på en enda dator åt gången och kan överföras från en maskin till 
+  en annan via inaktiverings- / aktiveringsproceduren. Internetanslutning krävs för aktivering och avaktivering. 
+  Beskrivning av hur man flyttar en licens till annan dator finns under kapitel "Installation av Agisoft Metashape".
+
+  Använder du Floating (flytande) licens kan du installera Metashape på ett obegränsat antal maskiner som är anslutna till ett servernätverk. 
+  Däremot är du begränsad i hur många datorer som kan köra Metashape samtidigt beroende på hur många licenser man köpt.
+
+  Eftersom man kan installera Metashape på fler system än antalet köpta licenser kan licenstagaren effektivt 
+  dela produkten över hela organisationen.
+
+  Ett programvaruverktyg som heter Floating License Server (FLS) som installeras på servermaskinen utfärdar licenser till klientmaskiner, 
+  upp till antalet köpta flytande licenser. Om alla flytande licenser används, kan inga fler datorer kan köra Metashape tills en 
+  licens returneras till FLS, d.v.s. tills Metashape-processen är färdig på en av maskinerna. Metashape flytande licenser är lånbara. 
+  En lånad licens kan användas på en frånkopplad maskin från servernätverket under en viss period (upp till 30 dagar).
+
+
+* Systemkrav för Agisoft Metashape
+  
+  Minimumkrav:
+  OS: 
+    * Windows 7 SP1 eller senare, Windows Server 2008 R2 eller senare
+    * Mac OS X High Sierra eller senare
+    * Debian/Ubuntu med GLIBC 2.19+ (64-bit) 
+
+  Hårdvara:
+    * Intel Core 2 Duo eller liknande med 2 kärnor
+    * 8 GB RAM
+
+  Rekommenderade:
+  OS: 
+    * Windows 7 SP1 eller senare, Windows Server 2008 R2 eller senare
+    * Mac OS X Mojave eller senare
+    * Debian/Ubuntu med GLIBC 2.19+ (64-bit)
+
+  Hårdvara:
+    * Intel Core i7 eller liknande med 4 kärnor
+    * 32 GB RAM
+    * Discrete NVIDIA eller AMD GPU med 4 GB minne eller mer
+
+  Antalet bilder som kan bearbetas beror på hur mycket RAM som finns tillgängligt samt bearbetningsinställningar.
+  Exempelvis om varje bild har en upplösning på 10MP så räcker 4 GB RAM till ett projekt på 30 till 50 bilder.
+  16 GB RAM räcker till 300-500 bilder.
+
+  Grafikkort
+  Metashape kan utnyttja GPU för att accelerera bearbetningen. För att använda GPU måste du ha en grafikkort inom följande kategori:
+
+  NVIDIA
+    * GeForce GTX 7** serien eller senare. Quadro 4000 eller senare med CUDA stöd.
+
+  AMD
+    * Radeon R9 serien eller senare. Radeon Pro WX 7100 eller senare med OpenCL 1.2 stöd.
+  
+  Metashape kommer med största sannolikheten stödja alla grafikkort som uppfyller ovanstående kriterier. 
+  Men eftersom det finns så många olika grafikkort på marknaden kan det hända att vissa grafikkort inte fungerar.
+  
+  Lista på testade grafikkort:
+  NVIDIA: 
+    * GeForce RTX 3080
+    * GeForce RTX 2080 Ti
+    * Tesla V100
+    * Tesla M60
+    * Quadro P6000
+    * Quardo M6000
+    * GeForce Titan X
+    * GeForce GTX 1080 Ti
+    * GeForce GTX 980 Ti
+    * GeForce GTX TITAN 
+    * GeForce GTX 780 Ti
+
+  AMD:
+    * Radeon VII
+    * Radeon RX 5700 XT
+    * Radeon RX 580
+    * Radeon Pro WX 7100
+    * Radeon RX 6800
+    * Radeon RX Vega 64
+    * Radeon RX Vega 56
+    * FirePro W9100
+    * Radeon R9 390x
+    * Radeon R9 290x
+
+  Tips:
+  * Välj "CPU enable flag" för att tillåta både CPU och GPU att användas för bearbetning om du inte har ett kraftfullt grafikkort.
+    Om du har ett kraftfullt grafikkort, stäng av "CPU enable flag" för snabb och stabil bearbetning.
+  * Använd inte GPU acceleration om du har integrerad GPU, dvs. inget externt grafikkort.
+  * Håll grafikkortet uppdaterat med senaste drivrutinerna.
+  * För MacOS och NVIDIA: Kontrollera att du har installerat senaste CUDA-drivrutinerna. 
+    I vissa fall behöver man ladda ner dessa manuellt här: http://www.nvidia.com/object/mac-driver-archive.html
+
+
+* 30-dagars trial och demo mode
+  Helt gratis demoversion finns på Agisoft sida för nedladdningar. Men demoversionen har begränsningar för spara och exportera funktioner.
+  Observera att både Standard- och Professional-versionerna av Metashape 1.5- och 1.6-versionerna gör det möjligt att köra den 
+  fullt fungerande testversionen från dialogrutan Aktivera produkt utan att behöva begära testnyckel.
+
+* Installation av Agisoft Metashape: Windows
+  Ladda ner Agisoft Metashape windows installationsfil från Agisofts hemsida.
+  Klicka på installationsfilen och följ instruktionerna.
+
+* Installation av Agisoft Metashape: Mac
+  Ladda ner Agisoft Metashape Mac installationsfil från Agisofts hemsida.
+  Öppna DMG filen och dra Metashape appen till Applikationer (Applications) mappen.
+  Kör inte Metashape från DMG filen, detta kan orsaka licensfel.
+
+* Installation av Agisoft Metashape: Linux
+  Ladda ner Agisoft Metashape Linux installationsfil från Agisofts hemsida.
+  Packa upp ZIP-filen till din önskade mapp.
+  Installera paketet: sudo apt install libxcb-xinerama0
+  Starta Metashape genom att klicka på Metashape.sh i installationsmappen.
+
+* Aktivering av Agisoft Metashape: Node-locked licens
+  - Onlineaktiveringsprocedur - För att aktivera Metashape på en maskin med Internetanslutning
+  1. Starta Metashape, gå till "Help" --> "Active product"
+  2. i "Activation" dialogrutan, fyll i licensnyckel. Notera att licensnyckeln aldrig innehåller nummer 0 - bara bokstaven "O".
+  3. Om allt är korrekt går det att klicka på "OK". Om "OK" är utgråad, kontrollera att du har fyllt i licensnyckeln korrekt.
+
+  - Offlineaktiveringsprocedur - För att aktivera Metashape på en maskin utan Internetanslutning
+  1. Starta Metashape, gå till "Help" --> "Active product"
+  2. i "Activation" dialogrutan, fyll i licensnyckel. Notera att licensnyckeln aldrig innehåller nummer 0 - bara bokstaven "O".
+  3. Klicka på "Activation request" knappen. Spara filen på din dator. 
+  4. Maila filen till support@agisoft.com. Supporten kommer återkoppla med en aktiveringsfil och mer instruktioner.
+
+  - Flytta licens till en annan maskin
+  Nodlåst licens (Stand-Alone eller Educational) kan flyttas från en dator till en annan via inaktiverings- / aktiveringsprocedur.
+  Börja med att avaktivera licensen från den gamla datorn. Gå till "Help" --> "Active product" och klicka på "Deactivate" knappen.
+  När licensen är avaktiverad kan du köra aktiveringsproceduren på en annan maskin. 
+
+
+2. Insamling och förberedelse av data
+
+* Utrustning
+  För att få bra resultat med Metashape krävs en bra kamera. Desto längre avstånd från objektet desto bättre kamera krävs.
+  Mavic 3E, Phantom 4 RTK och Zenmuse P1 är exempel på bra kameror.
+  För effektiv bearbetning rekommenderar vi minst 20 MP. För högre noggrannhet bör kameran ha en mekanisk slutare.
+
+  Undvik vidvinkelobjektiv, använd helst ett objektiv med en brännvidd mellan 20 till 80 mm intervall i 35 mm likvärdig.
+  Bästa valet är ett objektiv med en brännvidd på 50 mm (35 mm likvärdig). Detta är ett objektiv som är lika brännvidd som det ögat ser.
+
+  Fasta objektiv är bättre än zoomobjektiv. Zoomobjektiv kan ge en oskarp bild på grund av att objektivet inte är optimerat för alla brännvidder.
+
+  Undvik att använda kameran i automatiskt läge. Manuellt läge ger bättre kontroll över kameran och ger bättre resultat.
+  * Rekommenderade ISO värden är 100-200. Undvik höga ISO värden eftersom de kan ge en oskarp bild.
+  * Bästa öppningsvärde varierar mellan olika kameror. Värdet ska vara tillräckligt högt för att ge tillräcklig brännvidd. 
+  * Slutartid bör vara 1/1000 eller snabbare. Undvik lång slutartid eftersom det kan ge en oskarp bild.
+  * Använd RAW format för att få bästa möjliga kvalitet. Om du inte har möjlighet att använda RAW format, använd då JPG format.
+
+* Bildinsamling för fotogrammetri
+  Vi rekommenderar 80% överlappning på sidan och 80% framåt. 
+  När du gör en flygning över skog bör du ha 90% överlappning.
+  För att uppnå bättre resultat rekommenderar vi "cross-to-cross" rutter.
+  Detta innebär att du flyger över objektet från två olika håll.
+
+  Försök hålla samma höjd över marken under hela uppdraget. Om din drönare stödjer höjdmodeller rekommenderar vi detta.
+  Dela upp uppdraget i flera mindre uppdrag om du inte kan hålla samma höjd över marken.
+
+  Undvik förändrade ljusförhållanden under flygningen. Då finns risk att Metashape inte hittar gemensamma punkter i projektet.
+
+  Kontrollpunkter (GCP)
+  Kontrollpunkter är punkter som du placerar i projektet för att kontrollera att Metashape har rätt position och höjd.
+  Detta är viktigt om du vill använda projektet för att mäta höjd eller position.
+
+  Agisoft rekommenderar minst 10 st kontrollpunkter utplacerade över hela området. Färre kontrollpunkter kan ge osäkra resultat.
+  Om du flyger med RTK behöver du färre kontrollpunkter.
+
+* Bildförbehandling 
+  Metashape använder bilderna i sitt ursprungliga format. Beskär inte eller geometriskt omvandla, ie. rotera eller ändra storlek på bilderna 
+  innan du lägger in dem i Metashape. 
+  Redigering av ljusstyrka eller kontrast påverkar inte resultatet.
+
+* Anledningar till varför Metashape inte kan skapa en 3D-modell
+  I vissa fall kan det vara mycket svårt eller till och med omöjligt att bygga en korrekt 3D-modell från en uppsättning av bilder.
+  Det kan bero på:
+
+  * Redigering av bilder
+  Metashape kan endast bearbeta oredigerade bilder. Bearbetning foton som beskärs manuellt eller geometriskt skeva kommer sannolikt
+  att misslyckas eller producera mycket felaktiga resultat.
+
+  * Brist på EXIF-data
+  Metashape beräknar initialvärden för sensorpixelstorlek och brännviddsparametrar baserat på EXIF
+  data. Ju bättre initial approximation av parametervärdena är, desto mer exakt autokalibrering av
+  kamera kan utföras. Därför är tillförlitliga EXIF-data viktiga för korrekta rekonstruktionsresultat.
+  Men 3D-scen kan också rekonstrueras i frånvaro av EXIF-data. I det här fallet Metashape
+  antar att brännvidden i 35 mm ekvivalent motsvarar 50 mm och försöker rikta in fotona i enlighet med
+  med detta antagande. Om det korrekta brännviddsvärdet skiljer sig markant från 50 mm kan inriktningen
+  ge felaktiga resultat eller till och med misslyckas. I sådana fall är det nödvändigt att specificera den första kamerakalibreringen manuellt
+
+  Detaljerna för nödvändiga EXIF-taggar och instruktioner för manuell inställning av kalibreringsparametrarna är
+  ges i avsnittet Kamerakalibrering.
+
+  * Linsförvrängning (Lens distortion)
+  Förvrängningen av linserna som används för att ta bilderna bör simuleras väl med kameramodellen
+  används i programvaran. Generellt sett fungerar Browns distorsionsmodell implementerad i Metashape bra. 
+  Men eftersom fisheye/ultravidvinkellinser simuleras dåligt av den nämnda distorsionen
+  modell är det avgörande att välja rätt kameratyp i kamerakalibreringsdialogrutan innan bearbetning av en sådan
+  data - programvaran kommer att växla till lämplig distorsionsmodell
 
 
 
