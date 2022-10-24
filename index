@@ -1,1 +1,52 @@
-Mål
+
+
+Kurs: Agisoft Metashape
+Format: Video, online
+
+Swedron tar fram en Agisoft onlinekurs i videoformat. Kursen är uppdelad i kapitel baserat på manualen, varje kapitel är en video.
+Varje video har en längd på ca 2-8 min. 
+
+// Swedron is developing an Agisoft online course in video format. The course is divided into chapters based on the manual, each chapter is a video. Each video has a length of about 2-8 minutes.
+
+Upplägg har inspirerats från kursen: https://www.udemy.com/course/google-ads-for-beginners/
+
+Björn Sige spelar in video och redigerar, Swedron skriver manus.
+
+
+Innehållsförteckning
+
+1. Introduktion
+  * Vad är Agisoft Metashape
+    - Olika licenstyper
+  * Hur fungerar Agisoft Metashape
+    - Systemkrav för Agisoft Metashape
+    - 30-dagar trial och demo mode
+  * Installation av Agisoft Metashape
+    - Windows
+    - Mac OS
+    - Linux
+  * Aktivering av Agisoft Metashape
+    - Node-locked
+    - Floating
+      
+2. Insamling och förberedelse av data
+  * Utrustning
+  * Bildinsamlingsmetod för fotogrammetri
+  * Bildförbehandling
+  * Automatiserad uppdragsplanering
+3. Allmänt arbetsflöde
+  * Import av bilder
+    - Kameragruppering
+    - Inspektering av importerade bilder
+    - Multispektral
+    - Värmekamera
+  * Justera foton
+    - Kameravinklar
+
+
+
+
+
+
+
+
