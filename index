@@ -34,6 +34,7 @@ Innehållsförteckning
   * Bildinsamlingsmetod för fotogrammetri
   * Bildförbehandling
   * Automatiserad uppdragsplanering
+    
 3. Allmänt arbetsflöde
   * Import av bilder
     - Kameragruppering
@@ -307,7 +308,98 @@ Innehållsförteckning
   modell är det avgörande att välja rätt kameratyp i kamerakalibreringsdialogrutan innan bearbetning av en sådan
   data - programvaran kommer att växla till lämplig distorsionsmodell
 
+3. Allmänt arbetsflöde
+  Välkommen tillbaka! Det är dags att börja arbeta i Metashape.
+  Bearbetning av bilder med Metashape inkluderar följande steg, och allt detta kommer vi gå igenom i denna del av kursen.
+  * Importera bilder
+  * Inspektera bilder, ta bort onödiga bilder
+  * Justera kameragrupper
+  * Generering av punktmoln
+  * Generering av 3D-modell (mesh)
+  * Generera textur
+  * Generera DEM
+  * Generera ortofoto
+  * Exportera resultat
+
+  Efter att ha gått igenom denna del av kursen kommer du att kunna bearbeta bilder och skapa 3D-modeller med Metashape.
+
+  * Import av bilder
+  I detta avsnitt går vi igenom import av bilder, kameragruppering och bildinspektion. 
+  
+  - Lägg till bilder
+  I beskrivningen till detta avsnitt finns det ett dataset med bilder som du kan använda för att följa med i kursen.
+  Ladda ner datasetet och extrahera det till en mapp på din dator.
+  https://drive.google.com/drive/folders/1ihqU5gEy0MBkRWr-Uv243PqWvZkBtPGZ
+
+  Innan du påbörjar något uppdrag är det nödvändigt att påpeka vilka bilder som kommer att användas.
+  Faktum är att bilderna själva inte laddas in i Metashape förrän de gör det behövs. 
+  Kommandot "Add photos" noterar endast bildernas plats på hårddisken. Om du tar bort eller flyttar bilderna från hårddisken
+  kommer du behöva lägga till dem igen.
+
+  Alternativet "Add Folder" finns också tillgängligt. Detta kommando lägger till alla bilder i en mapp och dess undermappar.
+
+  Video: Lägg till bilder
+  För att lägga till bilder, klicka på "Add Photos" från "Workflow" menyn och välj bilderna du vill lägga till.
+
+  Video: Ta bort bilder
+  Om du råkat lägga till fel bilder kan du enkelt ta bort dom. Klicka på "Workspace" panelen och markera bilderna du vill ta bort.
+  Högerklicka på dem och välj "Remove items". Markerade bilder kommer tas bort.
+
+  Notera att Agisoft kallar bilder för kameror i arbetsflöden. Vi kommer också använda detta namn i denna kurs.
+
+  - Arbeta med kameragrupper
+  För att enkelt manipulera data samtidigt, t.ex. för att inaktivera/aktivera funktioner på flera kameror,
+  kan man organisera kameror i olika kameragrupper.
+
+  Video: Flytta kameror till en kameragrupp
+  För att flytta kameror till en kameragrupp, klicka på "Workspace" panelen och markera kamerorna du vill flytta.
+  Högerklicka på dem och välj "Move to group". Välj kameragruppen du vill flytta kamerorna till.
+  En ny grupp kommer skapas och valda bilder kommer flyttas till den.
 
 
+    - Multispektral
+    - Värmekamera
+ 
+3. Allmänt arbetsflöde
+  * Import av bilder
+    - Kameragruppering
+    - Inspektering av importerade bilder
+    - Multispektral
+    - Värmekamera
+  * Justera foton
+    - Kameravinklar
+    - Inriktningsparametrar
+    - Komponenter
+    - Inkrementell bildjustering
+    - Generering av punktmoln baserat på importerad kameradata
+  * Generering av punktmoln
+    - Parametrar
+    - Importera punktmoln
+  * Generering av 3D-modell (mesh)
+    - Mesh baserad på bilder
+      - Parametrar
+    - Importera mesh
+  * Modell textur
+    - Färgkalibrering
+    - Parametrar
+    - Se Mesh UVs
+  * Generera titled model 
+    - Parametrar
+    - Importera titled model
+  * Generera DEM (Digital Elevation Model)
+    - Parametrar
+    - Importera DEM
+  * Generera ortofoto
+    - Parametrar
+    - Importera ortofoto
+  * Exportera resultat
+    - Exportera punktmoln
+    - Exportera kamerakalibrering, kameravinklar och inriktningsparametrar
+    - Exportera 3D-modell
+    - Exportera ortofoto
+    - Exportera DSM (Digital Surface Model)
+    - Exportera titled model
+    - Undersökningsstatistik
+    - Bearbetningsrapport
 
 
