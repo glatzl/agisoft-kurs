@@ -345,7 +345,8 @@ Innehållsförteckning
   Om du råkat lägga till fel bilder kan du enkelt ta bort dom. Klicka på "Workspace" panelen och markera bilderna du vill ta bort.
   Högerklicka på dem och välj "Remove items". Markerade bilder kommer tas bort.
 
-  Notera att Agisoft kallar bilder för kameror i arbetsflöden. Vi kommer också använda detta namn i denna kurs.
+  Notera att Agisoft kallar bilder för både "photos" och "cameras" i arbetsflöden. Vi kommer använda det namnet Agisoft använder
+  i det särskilda fallet.
 
   - Arbeta med kameragrupper
   För att enkelt manipulera data samtidigt, t.ex. för att inaktivera/aktivera funktioner på flera kameror,
@@ -356,42 +357,102 @@ Innehållsförteckning
   Högerklicka på dem och välj "Move to group". Välj kameragruppen du vill flytta kamerorna till.
   En ny grupp kommer skapas och valda bilder kommer flyttas till den.
 
+  Alternativt kan kameror läggas till i en befintlig grupp genom att markera kameror, högerklicka och välj "move cameras". 
 
-    - Multispektral
-    - Värmekamera
+  - Inspektering av importerade bilder
+  Laddade bilder visas i "Workspace" panelen tillsammans med flaggor som indikerar deras status.
+  Det finns två olika flaggor: 
+  NC (Not calibrated) och NA (Not align).
+  NC flaggan indikerar att EXIF-datan inte är tillräcklig för att räkna ut kamerans brännvidd. I detta fall kommer Agisoft
+  utgå från att bilden var tagen med 50 mm i 35 mm likvärdighet. Om kamerans brännvidd är annorlunda behöver du 
+  kalibrera kameran manuellt. Detta är inget vi kommer gå igenom i kursen, men du kan läsa mer om det i Agisofts användarmanual.
+  https://www.agisoft.com/pdf/metashape-pro_1_8_en.pdf#%5B%7B%22num%22%3A310%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C72%2C690.141%2Cnull%5D
+
+  NA flaggan indikerar att kameran ännu inte är justerad ännu. Justering görs automatiskt när du kör "Align Photos" kommandot.
+  Detta kommer vi gå igenom i nästa avsnitt.
+
+  Dåliga bilder kan påverka resultatet negativt. Det är därför viktigt att kontrollera att alla bilder är av god kvalitet.
+  Agisoft kan identifera dåliga bilder genom funktionen "Estimate Image Quality". Bilder med mindre än 0.5 kvalitet rekommenderas att tas bort.
+  För att ta bort en bild, markera bilden och klicka på "disable" knappen.
+
+
+  * Justera bilder
+  Nu har vi importerat alla bilder, kontrollerat kvalitet och är redo att gå vidare.
+  I detta avsnitt går vi igenom justering av bilder, på engelska "Align Photos".
+  Detta inkluderar: 
+  - Justeringsparametrar, vilka inställningar ska användas för justeringen
+  - Justering av bilder
+  - Addera fler kameror efter en tidigare justering, omjustera med nya kameror
+  - Punktmolnsgenerering baserat på justerade bilder
+  
+
+  - Justering av bilder
+  Justering av bilder för första steget för att skapa ett punktmoln. Justering av bilder innebär att bilderna har rätt
+  position, rotation och skala i förhållande till varandra. Detta gör att Agisoft kan hitta gemensamma punkter i bilderna genom triangulering.
+
+  Om du använder olika fysiska kameror behöver du skapa grupp för varje kamera och justera dem separat.
+
+  Video: Justera bilder
+  För att justera bilder, klicka på "Align Photos" från "Workflow" menyn.
+  Accuracy ska vara "High". 
+  Vid bilder som med överlappning och om "Generic Preselection" är påslaget kommer Agisoft försöka matcha bilder med låg noggrannhet först.
+  Detta kommer minimera processens tid. Speciellt användbart vid stora projekt.
+  Reference preselection ska vara inställd på Source.
+  Reset current alignment rensar tidigare matchande punkter.
+
+  Här behöver vi konsulthjälp med input för de olika inställningsmöjligheterna. 
+ 
+  * Generering av punktmoln
+  Nu har vi importerat bilder och justerat dem. Vi är nu redo att skapa ett punktmoln.
+  I detta avsnitt går vi igenom punktmolnsgenerering, på engelska "Build Dense Cloud".
+  Metashape kommer skapa ett väldigt tätt punktmoln, vilket är nästan lika tätt som LiDAR, om inte tätare.
+
+  Video: Generera punktmoln
+  För att bygga ett punktmoln, klicka på "Build Dense Cloud" från "Workflow" menyn.
+  I "Build Dense Cloud" panelen väljer du önskade rekonstruktionsparametrar. Klicka på OK för att starta processen.
+  Desto högre kvalitet desto fler punkter. Välj en kvalitet som passar ditt projekt.
+  Vi kör med "High" kvalitet.
+
+  Här behöver vi konsulthjälp med input för de olika inställningsmöjligheterna. 
+
+  * Generering av 3D-modell (mesh)
+  Nu har vi importerat bilder, justerat dem och skapat ett punktmoln. Vi är nu redo att skapa en 3D-modell.
+  3D-modellen skapas genom triangulering av punkter i punktmolnet. 
+
+  Video: Generera 3D-modell
+  För att generera 3D-modellen, klicka på "Build Mesh" från "Workflow" menyn.
+  I "Build Mesh" panelen väljer du önskade rekonstruktionsparametrar. Klicka på OK för att starta processen.
+
+  Här behöver vi konsulthjälp med input för de olika inställningsmöjligheterna. Vi kör med standardinställningarna.
+
+  * Generera DEM (Digital Elevation Model)
+  Nu har vi importerat bilder, justerat dem, skapat ett punktmoln och en 3D-modell. Vi är nu redo att skapa ett DEM.
+
+  Digital höjdmodell (DEM) är en 2,5D-modell av en yta representerad i form av ett vanligt rutnät, 
+  med höjdvärden som lagras per varje cell i rutnätet.
+
+  Video: Generera DEM
+  För att generera DEM, klicka på "Build DEM" från "Workflow" menyn.
+  I "Build DEM" panelen väljer du önskade rekonstruktionsparametrar. Klicka på OK för att starta processen.
+
+  Här behöver vi konsulthjälp med input för de olika inställningsmöjligheterna. Vi kör med standardinställningarna.
+
+
+* Generera ortofoto
+  Det är dags att generera ett ortofoto över området. Detta är en bild som visar ytan i 2D, med färg och skuggor.
+  Agisoft kan skapa ortofoton med tre olika projektioner:
+  - Geografisk
+  - Cylinderisk
+  - Sfärisk
+
+  Geografisk projektion är en projektion av jorden på ett plan. Det är den vanligaste projektionen som används inom kartografi.
+  Cylindrisk projektion är en kartprojektion där meridianerna representeras som parallella räta linjer, och parallellerna är krökta.
+  Sfärisk projektion är en kartprojektion där ytan av en sfär projiceras på ett plan.
+
+
+  
  
 3. Allmänt arbetsflöde
-  * Import av bilder
-    - Kameragruppering
-    - Inspektering av importerade bilder
-    - Multispektral
-    - Värmekamera
-  * Justera foton
-    - Kameravinklar
-    - Inriktningsparametrar
-    - Komponenter
-    - Inkrementell bildjustering
-    - Generering av punktmoln baserat på importerad kameradata
-  * Generering av punktmoln
-    - Parametrar
-    - Importera punktmoln
-  * Generering av 3D-modell (mesh)
-    - Mesh baserad på bilder
-      - Parametrar
-    - Importera mesh
-  * Modell textur
-    - Färgkalibrering
-    - Parametrar
-    - Se Mesh UVs
-  * Generera titled model 
-    - Parametrar
-    - Importera titled model
-  * Generera DEM (Digital Elevation Model)
-    - Parametrar
-    - Importera DEM
-  * Generera ortofoto
-    - Parametrar
-    - Importera ortofoto
   * Exportera resultat
     - Exportera punktmoln
     - Exportera kamerakalibrering, kameravinklar och inriktningsparametrar
